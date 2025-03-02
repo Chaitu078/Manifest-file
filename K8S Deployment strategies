@@ -61,5 +61,48 @@ spec:
 :wq
 
 
+vim destination.yml
+---
+apiVersion:  networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: mydr
+spec:
+  host: mysvc
+  subsets:
+  - name: ss-1
+    labels:
+      version: v1
+  - name: ss-2
+    labels:
+      version: v2
+:wq
+
+vim virtualservice.yml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: myvs
+spec:
+  hosts:
+    - mysvc
+  http:
+  - route:
+    - destination:
+        host: mydr
+        subset: ss-1
+      weight: 90
+    - destination:
+        host: mydr
+        subset: ss-2
+      weight: 10
+:wq
+
+
+
+
+
+
+
 
 
