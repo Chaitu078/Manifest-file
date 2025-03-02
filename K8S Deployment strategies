@@ -1,0 +1,65 @@
+Service File
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysvc
+spec:
+  type: LoadBalancer
+  selector:
+    app: swiggy
+  ports:
+    - ports: 80
+      target: 80  
+:wq
+
+Deployment.yml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy1
+spec:
+  replicas: 1
+  selectors:
+    matchLabels:
+      app: swiggy
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: swiggy
+        version: v1
+    spec:
+      conatainers:
+        - name: cont-1
+          image: shaikmustafa/dm
+          ports:
+            - containerPort: 80 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy2
+spec:
+  replicas: 1
+  selectors:
+    matchLabels:
+      app: swiggy
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: swiggy
+        version: v2
+    spec:
+      conatainers:
+        - name: cont-2
+          image: shaikmustafa/paytm:bus
+          ports:
+            - containerPort: 80 
+:wq
+
+
+
+
