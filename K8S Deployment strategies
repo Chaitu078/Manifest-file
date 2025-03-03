@@ -10,7 +10,7 @@ spec:
     app: swiggy
   ports:
     - ports: 80
-      target: 80  
+      targetPort: 80  
 :wq
 
 Deployment.yml
