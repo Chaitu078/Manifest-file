@@ -1,3 +1,9 @@
+First we create label for that particular node server 
+kubectl label node i-03f5bec256f4cba0a node-id=myserver
+
+
+
+
 ---
 apiVersion: v1
 kind: Pod
