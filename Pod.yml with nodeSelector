@@ -1,4 +1,4 @@
-First we create label for that particular node server 
+First we create label for that particular node server and attach it in our yml file.
 kubectl label node i-03f5bec256f4cba0a node-id=myserver
 
 
