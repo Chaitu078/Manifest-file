@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod-2
+  labels:
+    env: dev
+    app: zepto
+spec:
+  containers:
+    - name: cont-3
+      image: nginx
+      ports:
+        - containerPort: 80
+  nodeSelector:
+    node-id: myserver
