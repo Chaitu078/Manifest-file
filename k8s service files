@@ -1,0 +1,68 @@
+vim pod.yml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  labels:
+     env: dev
+spec:
+  containers:
+    - name: cont-1
+      image: nginx
+      ports:
+        - containerPort: 80
+
+
+CLUSTERIP
+
+vim svc.yml
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops
+spec:
+  type: ClusterIP
+  selector:
+    env: dev
+  ports:
+    - port: 80
+      targetPort: 80
+
+NODEPORT
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zomato
+spec:
+  type: NodePort
+  selector:
+    env: dev
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30001
+
+
+LOAD-BALANCER
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: paytm
+spec:
+  type: LoadBalancer
+  selector:
+    env: dev
+  ports:
+    - port: 80
+      targetPort: 80
+
+
+
