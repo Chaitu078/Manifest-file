@@ -1,0 +1,57 @@
+vim pod.yml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod-1
+  labels:
+    env: test
+spec:
+  containers:
+    - name: cont-1
+      image: nginx
+      ports:
+        - containerPort: 80
+
+vim svc.yml
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phonepay
+spec:
+  type: NodePort
+  selector:
+    env: test
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 31000
+
+
+vim rs.yml
+
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myrs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      env: test
+  template:
+    metadata:
+      labels:
+        env: test
+
+    spec:
+      conatiners:
+        - name: cont-1
+          image: nginx
+          ports:
+            - containerPort: 80
+
