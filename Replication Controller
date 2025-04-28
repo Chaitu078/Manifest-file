@@ -1,0 +1,58 @@
+vim pod.yml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod-1
+  labels:
+    env: test
+spec:
+  containers:
+    - name: cont-1
+      image: nginx
+      ports:
+        - containerPort: 80
+
+
+vim svc.yml
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: amazon
+spec:
+  type: NodePort
+  selector:
+    env: test
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30111
+
+
+vim rc.yml
+
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myrc
+spec:
+  replicas: 2
+  selector:
+    env: test
+  template:
+    metadata:
+      labels:
+        env: test
+
+    spec:
+      containers:
+       - name: cont-1
+         image: nginx
+         ports:
+          - containerPort: 80
+
+
