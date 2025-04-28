@@ -1,0 +1,57 @@
+vim pod.yml
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod-3
+  labels:
+    env: test
+spec:
+  containers:
+    - name: cont-3
+      image: nginx
+      ports:
+        - containerPort: 80
+
+
+vim svc.yml
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: foodapp
+spec:
+  type: NodePort
+  selector:
+    env: test
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 31010
+
+
+vim Deployment.yml
+
+  ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydeploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: test
+  template:
+    metadata:
+      labels:
+        env: test
+
+    spec:
+      containers:
+        - name: cont-3
+          image: nginx
+          ports:
+           - containerPort: 80
