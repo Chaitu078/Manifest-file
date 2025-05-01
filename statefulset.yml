@@ -19,3 +19,5 @@ spec:
           ports:
             - containerPort: 80
             
+
+ kubectl apply -f statefulset.yml         whenever changes happen in file we use this command
