@@ -1,0 +1,28 @@
+vim namespace.yml 
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-ns
+
+vim daemonset.yml
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: myds
+  namespace: my-ns
+spec:
+  selector:
+    matchLabels:
+      app: flightbooking
+  template:
+    metadata:
+      labels:
+        app: flightbooking
+    spec:
+      containers:
+        - name: cont-11
+          image: nginx
+          ports:
+            - containerPort: 80
