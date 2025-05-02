@@ -1,0 +1,35 @@
+vim role.yml
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: dev-role
+  namespace: dev
+rules:
+  - apiGroups: ["*"]
+    resources: ["pods", "services"]
+    verbs: ["list", "view", "watch"]
+
+  - apiGroups: ["*"]
+    resources: ["deployments"]
+    verbs: ["create", "list", "delete"]
+
+
+vim rolebinding.yml
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: myrole-binding
+  namespace: dev
+subjects:
+  - kind: User
+    name: chaitanya
+    apiGroup: rbac.authorization.k8s.io
+
+roleRef:
+  kind: Role
+  name: dev-role
+  apiGroup: rbac.authorization.k8s.io
+
+
