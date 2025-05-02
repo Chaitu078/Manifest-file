@@ -1,0 +1,37 @@
+vim cluster-role.yml
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: chaitu-cluster-role
+
+rules:
+  - apiGroups: ["*"]
+    resources: ["pods", "services"]
+    verbs: ["list", "view", "watch"]
+
+  - apiGroups: ["*"]
+    resources: ["deployments"]
+    verbs: ["create", "list", "delete"]
+
+
+
+vim cluster-rolebinding.yml
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: chaitu-cluster-binding
+
+subjects:
+  - kind: User
+    name: chaitanya
+    apiGroup: rbac.authorization.k8s.io
+
+roleRef:
+  kind: ClusterRole
+  name: chaitu-cluster-role
+  apiGroup: rbac.authorization.k8s.io
+
+
+
